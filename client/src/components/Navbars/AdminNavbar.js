@@ -82,12 +82,7 @@ function AdminNavbar(props) {
           </NavbarToggler>
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="ml-auto" navbar>
-            <a href ="/Help" className="faq" style={{borderRadius: "10%", textDecoration: "none", fontWeight: "bolder"}} >
-                 <h3 style={{color: "black"}}>Help?</h3>
-              </a>
               
-              
-              <li className="separator d-lg-none" />
             </Nav>
           </Collapse>
         </Container>

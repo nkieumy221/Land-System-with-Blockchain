@@ -97,7 +97,7 @@ class sellerProfile extends Component {
               <Row>
                 <Col md="12">
                   <FormGroup>
-                    <label>Your Wallet Address: </label>
+                    <label>Địa chỉ ví của bạn: </label>
                     <Input
                       disabled
                       type="text"
@@ -109,7 +109,7 @@ class sellerProfile extends Component {
               <Row>
                 <Col md="12">
                   <FormGroup>
-                    <label>Name</label>
+                    <label>Tên</label>
                     <Input
                       disabled
                       type="text"
@@ -122,7 +122,7 @@ class sellerProfile extends Component {
               <Row>
                 <Col md="12">
                   <FormGroup>
-                    <label>Age</label>
+                    <label>Tuổi</label>
                     <Input
                       disabled
                       type="text"
@@ -135,7 +135,7 @@ class sellerProfile extends Component {
               <Row>
                 <Col md="12">
                   <FormGroup>
-                    <label>Aadhar Number</label>
+                    <label>Số CMND/ Căn cước công dân</label>
                     <Input
                     disabled
                     type="text"
@@ -147,7 +147,7 @@ class sellerProfile extends Component {
               <Row>
                 <Col md="12">
                   <FormGroup>
-                    <label>Pan Number</label>
+                    <label>Số tài khoản ngân hàng</label>
                     <Input
                     disabled
                     type="text"
@@ -159,7 +159,7 @@ class sellerProfile extends Component {
               <Row>
                 <Col md="12">
                   <FormGroup>
-                    <label>Owned Lands</label>
+                    <label>Số điện thoại</label>
                     <Input
                     disabled
                     type="text"
@@ -171,7 +171,7 @@ class sellerProfile extends Component {
               <Row>
                 <Col md="12">
                   <FormGroup>
-                    <label>Your Aadhar Document</label>
+                    <label>Ảnh CMND</label>
                     <div class="post-meta"><span class="timestamp"> <a href={`https://ipfs.io/ipfs/${seller[5]}`} target="_blank">Here</a></span></div>
                   </FormGroup>
                 </Col>
@@ -215,7 +215,7 @@ class sellerProfile extends Component {
                             <Col md="8">
                                 <Card>
                                     <CardHeader>
-                                        <h5 className="title">Seller Profile</h5>
+                                        <h5 className="title">Thông tin Người bán</h5>
                                         <h5 className="title">{verification}</h5>
 
                                     </CardHeader>
@@ -223,7 +223,7 @@ class sellerProfile extends Component {
                                         <Form>
                                             {sellerTable}
                                             <Button href="/Seller/updateSeller"  className="btn-fill" disabled={!this.state.verified} color="primary">
-                                            Edit Profile
+                                            Chỉnh sửa thông tin
                                       </Button>
                                         </Form>
                                     </CardBody>

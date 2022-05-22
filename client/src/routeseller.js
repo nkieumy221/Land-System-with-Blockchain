@@ -9,7 +9,7 @@ import Help from "./Help";
 var routes = [
   {
     path: "/SellerDashboard",
-    name: "Dashboard",
+    name: "Home",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: SellerDashboard,
@@ -17,7 +17,7 @@ var routes = [
   },
   {
     path: "/AddLand",
-    name: "Add Land",
+    name: "Thêm đất đai",
     rtlName: "الرموز",
     icon: "tim-icons icon-world",
     component: AddLand,
@@ -25,7 +25,7 @@ var routes = [
   },
   {
     path: "/sellerProfile",
-    name: "Seller Profile",
+    name: "Cá nhân",
     rtlName: "الرموز",
     icon: "tim-icons icon-single-02",
     component: sellerProfile,
@@ -33,26 +33,10 @@ var routes = [
   },
   {
     path: "/ApproveRequest",
-    name: "Land Requests",
+    name: "Xác minh giao dịch",
     rtlName: "الرموز",
     icon: "tim-icons icon-badge",
     component: ApproveRequest,
-    layout: "/Seller",
-  },
-  {
-    path: "/viewImage",
-    name: "Land Gallery",
-    rtlName: "الرموز",
-    icon: "tim-icons icon-image-02",
-    component: viewImage,
-    layout: "/Seller",
-  },
-  {
-    path: "/Help",
-    name: "Help",
-    rtlName: "الرموز",
-    icon: "tim-icons icon-image-02",
-    component: Help,
     layout: "/Seller",
   },
   {

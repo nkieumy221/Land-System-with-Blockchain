@@ -201,7 +201,7 @@ class updateSeller extends Component {
                                             <Row>
                                                 <Col md="12">
                                                     <FormGroup>
-                                                        <label>Name</label>
+                                                        <label>Tên</label>
                                                         <Input
                                                             type="text"
                                                             value={this.state.name}
@@ -214,7 +214,7 @@ class updateSeller extends Component {
                                             <Row>
                                                 <Col md="12">
                                                     <FormGroup>
-                                                        <label>Age</label>
+                                                        <label>Tuổi</label>
                                                         <Input
                                                             type="text"
                                                             value={this.state.age}
@@ -227,7 +227,7 @@ class updateSeller extends Component {
                                             <Row>
                                                 <Col md="12">
                                                     <FormGroup>
-                                                        <label>Aadhar Number</label>
+                                                        <label>CMND / Căn cước công dân</label>
                                                         <Input
                                                             type="text"
                                                             value={this.state.aadharNumber}
@@ -239,7 +239,7 @@ class updateSeller extends Component {
                                             <Row>
                                                 <Col md="12">
                                                     <FormGroup>
-                                                        <label>Pan Number</label>
+                                                        <label>Số tài khoản ngân hàng</label>
                                                         <Input
                                                             type="text"
                                                             value={this.state.panNumber}
@@ -251,7 +251,7 @@ class updateSeller extends Component {
                                             <Row>
                                                 <Col md="12">
                                                     <FormGroup>
-                                                        <label>Owned Lands</label>
+                                                        <label>Số điện thoại</label>
                                                         <Input
                                                             type="text"
                                                             value={this.state.landsOwned}

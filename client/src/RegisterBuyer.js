@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LandContract from "./artifacts/Land.json";
 import getWeb3 from "./getWeb3";
 import ipfs from './ipfs';
-
+import logo from "./triangle-logo.png";
 import { FormGroup, FormControl, Button, Spinner, FormFile } from 'react-bootstrap'
 
 //import Navigation from './Navigation'
@@ -63,16 +63,16 @@ class RegisterBuyer extends Component {
     addDoc = async () => {
         // alert('In add image')
         await ipfs.files.add(this.state.buffer2, (error, result) => {
-          if (error) {
-            alert(error)
-            return
-          }
-    
-        //   alert(result[0].hash)
-          this.setState({ document: result[0].hash });
-          console.log('document:', this.state.document);
+            if (error) {
+                alert(error)
+                return
+            }
+
+            //   alert(result[0].hash)
+            this.setState({ document: result[0].hash });
+            console.log('document:', this.state.document);
         })
-      }
+    }
 
     RegisterBuyer = async () => {
         this.addDoc();
@@ -82,16 +82,14 @@ class RegisterBuyer extends Component {
 
         if (this.state.name == '' || this.state.age == '' || this.state.city == '' || this.state.aadharNumber == '' || this.state.panNumber == '') {
             alert("All the fields are compulsory!");
-        } else if(!Number(this.state.aadharNumber) || this.state.aadharNumber.length != 12 ){
-            alert("Aadhar Number should be 12 digits long!");
-        } else if(this.state.panNumber.length != 10){
-            alert("Pan Number should be a 10 digit unique number!");
+        } else if (!Number(this.state.aadharNumber) || this.state.aadharNumber.length != 9) {
+            alert("CARDID  should be 9 digits long!");
         } else if (!Number(this.state.age) || this.state.age < 18) {
             alert("Your age must be a number");
-        } else if(this.state.email == '' || !pattern.test(this.state.email)){
+        } else if (this.state.email == '' || !pattern.test(this.state.email)) {
             alert('Please enter a valid email address\n');
         }
-        else{
+        else {
             await this.state.LandInstance.methods.registerBuyer(
                 this.state.name,
                 this.state.age,
@@ -100,11 +98,11 @@ class RegisterBuyer extends Component {
                 this.state.panNumber,
                 this.state.document,
                 this.state.email,
-                )
+            )
 
                 .send({
-                    from : this.state.account,
-                    gas : 2100000
+                    from: this.state.account,
+                    gas: 2100000
                 }).then(response => {
                     this.props.history.push("/admin/dashboard");
                 });
@@ -138,11 +136,11 @@ class RegisterBuyer extends Component {
         const reader2 = new window.FileReader()
         reader2.readAsArrayBuffer(file2)
         reader2.onloadend = () => {
-          this.setState({ buffer2: Buffer(reader2.result) })
-          console.log('buffer2', this.state.buffer2)
+            this.setState({ buffer2: Buffer(reader2.result) })
+            console.log('buffer2', this.state.buffer2)
         }
         console.log('caoture doc...')
-      }
+    }
 
 
     render() {
@@ -151,9 +149,9 @@ class RegisterBuyer extends Component {
                 <div className="bodyC">
 
                     <div className="img-wrapper">
-                        <img src="https://i.pinimg.com/originals/71/6e/00/716e00537e8526347390d64ec900107d.png" className="logo" />
+                        <img src={logo} alt="" className="logo" />
                         <div className="wine-text-container">
-                            <div className="site-title wood-text">Land Registry</div>
+                            <div className="site-title wood-text">The Land</div>
                         </div>
                     </div>
                     <div className="auth-wrapper">
@@ -175,9 +173,9 @@ class RegisterBuyer extends Component {
         return (
             <div className="bodyC">
                 <div className="img-wrapper">
-                    <img src="https://i.pinimg.com/originals/71/6e/00/716e00537e8526347390d64ec900107d.png" className="logo" />
+                    <img src={logo} alt="" className="logo" />
                     <div className="wine-text-container">
-                        <div className="site-title wood-text">Land Registry</div>
+                        <div className="site-title wood-text">The Land</div>
                     </div>
                 </div>
                 <div className="auth-wrapper">
@@ -186,19 +184,17 @@ class RegisterBuyer extends Component {
 
                             <div>
                                 <div>
-                                    <h1 style={{color:"black"}}>
-                                        Buyer Registration
-                  </h1>
+                                    <h3 style={{ color: "black" }}>
+                                        Đăng ký tài khoản người dùng
+                                    </h3>
                                 </div>
                             </div>
-
-
 
                             <div className="form">
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Name --
-                      </div>
+                                        Họ và Tên
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -210,8 +206,8 @@ class RegisterBuyer extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Age --
-                      </div>
+                                        Tuổi
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -223,8 +219,8 @@ class RegisterBuyer extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter City --
-                      </div>
+                                        Địa chỉ
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -236,8 +232,8 @@ class RegisterBuyer extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Email Address --
-                      </div>
+                                        Email
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -249,8 +245,8 @@ class RegisterBuyer extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Aadhar No --
-                      </div>
+                                        Số CMND/ Căn cước công dân
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -262,8 +258,8 @@ class RegisterBuyer extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Pan no --
-                      </div>
+                                        Số tài khoản ngân hàng
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -274,7 +270,7 @@ class RegisterBuyer extends Component {
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <label>Add your Aadhar Card (PDF Format)</label>
+                                    <label>Ảnh CMND/ Căn cước công dân (PDF Format)</label>
                                     <FormFile
                                         id="File2"
                                         onChange={this.captureDoc}
@@ -282,8 +278,8 @@ class RegisterBuyer extends Component {
                                 </FormGroup>
 
                                 <Button onClick={this.RegisterBuyer} className="button-vote">
-                                    Register as Buyer
-                  </Button>
+                                    Đăng kí tài khoản
+                                </Button>
                             </div>
 
                         </div>

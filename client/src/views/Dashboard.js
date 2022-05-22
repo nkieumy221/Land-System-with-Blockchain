@@ -1,17 +1,16 @@
-import React, { Component } from "react";
-// nodejs library that concatenates classes
-import classNames from "classnames";
+import React, { Component } from 'react';
 import Land from "../artifacts/Land.json";
 import getWeb3 from "../getWeb3";
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { DrizzleProvider } from '@drizzle/react-plugin';
-import { Spinner } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap';
 import {
   AccountData,
   ContractData,
   ContractForm,
   LoadingContainer
 } from "@drizzle/react-components";
+import "../index.css";
+
 // reactstrap components
 import {
   Button,
@@ -32,22 +31,18 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
-import "../card.css";
 
 
 const drizzleOptions = {
   contracts: [Land]
 }
 
-
+var verified;
 var row = [];
-var countarr = [];
-var userarr = [];
-var reqsarr = [];
-var landOwner = [];
-// var requested = false;
+var rowsIpfs = [];
+var indents = [];
 
-class Dashboard extends Component {
+class viewImage extends Component {
   constructor(props) {
     super(props)
 
@@ -55,14 +50,20 @@ class Dashboard extends Component {
       LandInstance: undefined,
       account: null,
       web3: null,
+      flag: null,
+      verified: '',
+      registered: '',
       count: 0,
+      id: '',
       requested: false,
-    }
+    };
+
   }
+
 
   requestLand = (seller_address, land_id) => async () => {
 
-    console.log(seller_address);
+    console.log(seller_address)
     console.log(land_id);
     // this.setState({requested: true});
     // requested = true;
@@ -81,10 +82,17 @@ class Dashboard extends Component {
 
   }
 
+  viewImage = (landId) => {
+    alert(landId);
+    this.props.history.push({
+      pathname: '/viewImage',
+    })
+  }
+
+
   componentDidMount = async () => {
     //For refreshing page only once
     if (!window.location.hash) {
-      console.log(window.location.hash);
       window.location = window.location + '#loaded';
       window.location.reload();
     }
@@ -102,71 +110,94 @@ class Dashboard extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      this.setState({ LandInstance: instance, web3: web3, account: accounts[0] });
-
       const currentAddress = await web3.currentProvider.selectedAddress;
       console.log(currentAddress);
-      var registered = await this.state.LandInstance.methods.isBuyer(currentAddress).call();
-      console.log(registered);
+      this.setState({ LandInstance: instance, web3: web3, account: accounts[0] });
+      verified = await this.state.LandInstance.methods.isVerified(currentAddress).call();
+      console.log(verified);
+      this.setState({ verified: verified });
+      var registered = true;
       this.setState({ registered: registered });
+
       var count = await this.state.LandInstance.methods.getLandsCount().call();
       count = parseInt(count);
       console.log(typeof (count));
       console.log(count);
-      var verified = await this.state.LandInstance.methods.isVerified(currentAddress).call();
-      console.log(verified);
+      //this.setState({count:count});
 
-      // var countbuyer = await this.state.LandInstance.methods.getBuyersCount().call();
-      // var countseller = await this.state.LandInstance.methods.getSellersCount().call();
-      // userarr.push(<p>{countseller.toString()}</p>);
+      var dict = {}
+      var count1 = [];
+      for (var i = 1; i < count + 1; i++) {
+        count1.push(i);
+      }
 
-      // countarr.push(<p>{count.toString()}</p>);
-      countarr.push(<ContractData contract="Land" method="getLandsCount" />);
-      userarr.push(<ContractData contract="Land" method="getSellersCount" />);
-      reqsarr.push(<ContractData contract="Land" method="getRequestsCount" />);
+      count1.forEach(async (i) => {
+        var address = await this.state.LandInstance.methods.getLandOwner(i).call();
+        dict[i] = address;
+      })
 
       var rowsArea = [];
       var rowsCity = [];
       var rowsState = [];
+      var rowsSt = [];
       var rowsPrice = [];
       var rowsPID = [];
-      var rowsSurvey = [];
+      var rowsSelected = [];
+      var rowsID = [];
+      var rowsImg = [];
 
-
-      var dict = {}
-      for (var i = 1; i < count + 1; i++) {
-        var address = await this.state.LandInstance.methods.getLandOwner(i).call();
-        dict[i] = address;
-      }
-
-      console.log(dict[1]);
-
-      for (var i = 1; i < count + 1; i++) {
+      for (let i = 1; i < count + 1; i++) {
+        rowsID.push(<ContractData contract="Land" method="getIdLand" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
         rowsArea.push(<ContractData contract="Land" method="getArea" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
         rowsCity.push(<ContractData contract="Land" method="getCity" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
         rowsState.push(<ContractData contract="Land" method="getState" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
+        rowsSt.push(<ContractData contract="Land" method="getStatus" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
         rowsPrice.push(<ContractData contract="Land" method="getPrice" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
         rowsPID.push(<ContractData contract="Land" method="getPID" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
-        rowsSurvey.push(<ContractData contract="Land" method="getSurveyNumber" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
+        rowsSelected.push(<ContractData contract="Land" method="isApproved" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
+      }
+      var data = [];
+      for (let i = 0; i < count; i++) {
+        data.push(i);
       }
 
-      for (var i = 0; i < count; i++) {
+
+      data.forEach(async (i) => {
+        let landImg1 = this.state.LandInstance.methods.getImage(i + 1).call();
+        let landImg = await landImg1
         var requested = await this.state.LandInstance.methods.isRequested(i + 1).call();
-        // console.log(requested);
+        console.log(i, requested)
+        indents.push(
+          <Col xs="6" key={i}>
+            <div className="post-module">
 
-        row.push(<tr><td>{i + 1}</td><td>{rowsArea[i]}</td><td>{rowsCity[i]}</td><td>{rowsState[i]}</td><td>{rowsPrice[i]}</td><td>{rowsPID[i]}</td><td>{rowsSurvey[i]}</td>
-          <td>
-            <Button onClick={this.requestLand(dict[i + 1], i + 1)} disabled={!verified || requested} className="button-vote">
-              Request Land
-            </Button>
-          </td>
-        </tr>)
-      }
-      console.log(row);
+              <div className="thumbnail">
+                <div className="date">
+                  <div className="day">{i + 1}</div>
+                </div><img src={`https://ipfs.io/ipfs/${landImg}`} />
+              </div>
+              <div className="post-content">
+                <div className="category">Photos</div>
+                <h1 className="sub_title">{rowsCity[i]}, {rowsState[i]}</h1>
+                <h2 className="title">{rowsArea[i]} m&sup2;</h2>
+                <p className="description">Mã số đất: {rowsPID[i]}</p>
+                <div className="post-meta"><span className="timestamp">Giá: {rowsPrice[i]} vnđ</span></div>
+                <div className="post-meta">
+                  {requested}
+                  {!requested
+                    ?
+                    <Button onClick={this.requestLand(dict[i + 1], i + 1)} className="button-vote">
+                      Mua đất
+                    </Button>
+                    :
+                    <b className="">Đang kiểm duyệt </b>
+                  }
 
-
-
-
+                </div>
+              </div>
+            </div>
+          </Col>);
+      });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -175,8 +206,6 @@ class Dashboard extends Component {
       console.error(error);
     }
   };
-
-
 
   render() {
     if (!this.state.web3) {
@@ -192,17 +221,17 @@ class Dashboard extends Component {
       );
     }
 
-    if (!this.state.registered) {
+    if (!this.state.registered || !this.state.verified) {
       return (
         <div className="content">
           <div>
             <Row>
               <Col xs="6">
-                <Card className="card-chart">
+                <Card>
                   <CardBody>
                     <h1>
-                      You are not verified to view this page
-                                        </h1>
+                      Tài khoản cần được xác minh để xem được nội dung này
+                    </h1>
                   </CardBody>
                 </Card>
               </Col>
@@ -213,136 +242,27 @@ class Dashboard extends Component {
       );
     }
 
+
     return (
       <>
         <div className="content">
-        <DrizzleProvider options={drizzleOptions}>
-            <LoadingContainer>
-              <div className="main-section">
-                <Row>
-                  <Col lg="4">
-                    <div class="dashbord dashbord-skyblue">
-                      <div class="icon-section">
-                        <i class="fa fa-users" aria-hidden="true"></i><br />
-                        <medium>Total Sellers</medium><br />
-                       <p> {userarr} </p>
-                      </div>
-                      <div class="detail-section"><br />
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="4">
-                    <div class="dashbord dashbord-orange">
-                      <div class="icon-section">
-                        <i class="fa fa-landmark" aria-hidden="true"></i><br />
-                        <medium>Registered Lands Count</medium><br />
-                        <p>{countarr}</p>
-                      </div>
-                      <div class="detail-section"><br />
-                      </div>
-                    </div>
-                  </Col>
-                  <Col lg="4">
-                    <div class="dashbord dashbord-blue">
-                      <div class="icon-section">
-                        <i class="fa fa-bell" aria-hidden="true"></i><br />
-                        <medium>Total Requests</medium><br />
-                        <p>{reqsarr}</p>
-                      </div>
-                      <div class="detail-section">
-                        <br />
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </LoadingContainer>
-          </DrizzleProvider>
-                    <Row>
-            <Col lg="4">
-              <Card>
-                <CardHeader>
-                  <h5 className="title">Profile</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-
-                    <Button href="/admin/buyerProfile" className="btn-fill" color="primary">
-                      View Profile
-                </Button>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col lg="4">
-              <Card>
-                <CardHeader>
-                  <h5 className="title">Owned Lands</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-
-                    <Button href="/admin/OwnedLands" className="btn-fill" color="primary">
-                      View Your Lands
-                </Button>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col lg="4">
-              <Card>
-                <CardHeader>
-                  <h5 className="title">Make Payments for Approved Land Requests</h5>
-                </CardHeader>
-                <CardBody>
-                  <div className="chart-area">
-
-                    <Button href="/admin/MakePayment" className="btn-fill" color="primary">
-                      Make Payment
-                </Button>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
           <DrizzleProvider options={drizzleOptions}>
             <LoadingContainer>
+
               <Row>
-                <Col lg="12" md="12">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle tag="h4">Lands Info</CardTitle>
-                    </CardHeader>
-                    <CardBody>
-                      <Table className="tablesorter" responsive color="black">
-                        <thead className="text-primary">
-                          <tr>
-                            <th>#</th>
-                            <th>Area</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Price</th>
-                            <th>Property PID</th>
-                            <th>Survey Number</th>
-                            <th>Request Land</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {row}
-                        </tbody>
-                      </Table>
-                    </CardBody>
-                  </Card>
-                </Col>
+
+                {indents}
+
               </Row>
             </LoadingContainer>
           </DrizzleProvider>
+
         </div>
       </>
 
     );
+
   }
 }
 
-
-export default Dashboard;
+export default viewImage;

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import LandContract from "./artifacts/Land.json"
 import getWeb3 from "./getWeb3"
 import ipfs from './ipfs';
+import logo from "./triangle-logo.png";
 
 import { FormGroup, FormControl, Button, Spinner, FormFile } from 'react-bootstrap'
 
@@ -80,10 +81,8 @@ class RegisterSeller extends Component {
         await new Promise(resolve => setTimeout(resolve, 10000));
         if (this.state.name == '' || this.state.age == '' || this.state.aadharNumber == '' || this.state.panNumber == '' || this.state.landsOwned == '') {
             alert("All the fields are compulsory!");
-        } else if (!Number(this.state.aadharNumber) || this.state.aadharNumber.length != 12) {
-            alert("Aadhar Number should be 12 digits long!");
-        } else if (this.state.panNumber.length != 10) {
-            alert("Pan Number should be a 10 digit unique number!");
+        } else if (!Number(this.state.aadharNumber) || this.state.aadharNumber.length != 9) {
+            alert("CARDID Number should be 9 digits long!");
         } else if (!Number(this.state.age) || this.state.age < 21) {
             alert("Your age must be a number");
         } else {
@@ -138,9 +137,9 @@ class RegisterSeller extends Component {
             return (
                 <div>
                     <div className="img-wrapper">
-                        <img src="https://i.pinimg.com/originals/71/6e/00/716e00537e8526347390d64ec900107d.png" className="logo" />
+                        <img src={logo} alt="" className="logo" />
                         <div className="wine-text-container">
-                            <div className="site-title wood-text">Land Registry</div>
+                            <div className="site-title wood-text">The Land</div>
                         </div>
                     </div>
                     <div className="auth-wrapper">
@@ -163,9 +162,9 @@ class RegisterSeller extends Component {
             <div className="bodyC">
 
                 <div className="img-wrapper">
-                    <img src="https://i.pinimg.com/originals/71/6e/00/716e00537e8526347390d64ec900107d.png" className="logo" />
+                    <img src={logo} alt="" className="logo" />
                     <div className="wine-text-container">
-                        <div className="site-title wood-text">Land Registry</div>
+                        <div className="site-title wood-text">The Land</div>
                     </div>
                 </div>
                 <div className="auth-wrapper">
@@ -174,9 +173,9 @@ class RegisterSeller extends Component {
 
                             <div>
                                 <div>
-                                    <h1 style={{ color: "black" }}>
-                                        Seller Registration
-                  </h1>
+                                    <h3 style={{ color: "black" }}>
+                                        Đăng ký tài khoản Người bán
+                                    </h3>
                                 </div>
                             </div>
 
@@ -185,8 +184,8 @@ class RegisterSeller extends Component {
                             <div className="form">
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Name --
-                      </div>
+                                        Họ và Tên
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -198,8 +197,8 @@ class RegisterSeller extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Age --
-                      </div>
+                                        Độ tuổi
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -211,8 +210,8 @@ class RegisterSeller extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Aadhar No --
-                      </div>
+                                        Số CMND/ Căn cước công dân
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -224,8 +223,8 @@ class RegisterSeller extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Pan no --
-                      </div>
+                                        Số tài khoản ngân hàng
+                                  </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -237,8 +236,8 @@ class RegisterSeller extends Component {
 
                                 <FormGroup>
                                     <div className="form-label">
-                                        Enter Owned Lands --
-                      </div>
+                                        Số điện thoại
+                                    </div>
                                     <div className="form-input">
                                         <FormControl
                                             input='text'
@@ -249,7 +248,7 @@ class RegisterSeller extends Component {
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <label>Add your Aadhar Card (PDF Format)</label>
+                                    <label>Ảnh CMND/ Căn cước công dân (PDF Format)</label>
                                     <FormFile
                                         id="File2"
                                         onChange={this.captureDoc}
@@ -257,8 +256,8 @@ class RegisterSeller extends Component {
                                 </FormGroup>
 
 
-                                <Button onClick={this.registerSeller} className="button-vote">
-                                    Register as Seller
+                                <Button onClick={this.registerSeller} className="button-vote mt-2">
+                                    Đăng Ký
                   </Button>
                             </div>
 

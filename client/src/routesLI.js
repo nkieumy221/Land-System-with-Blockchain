@@ -15,7 +15,7 @@ var routes = [
   },
   {
     path: "/BuyerInfo",
-    name: "BuyerInfo",
+    name: "Thông tin người dùng",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-single-02",
     component: BuyerInfo,
@@ -23,7 +23,7 @@ var routes = [
   },
   {
     path: "/SellerInfo",
-    name: "SellerInfo",
+    name: "Thông tin người bán",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-single-02",
     component: SellerInfo,
@@ -31,7 +31,7 @@ var routes = [
   },
   {
     path: "/TransactionInfo",
-    name: "TransactionInfo",
+    name: "Giao dịch",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-send",
     component: TransactionInfo,

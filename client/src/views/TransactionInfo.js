@@ -56,12 +56,12 @@ class TransactionInfo extends Component {
     }
 
     landTransfer = (landId, newOwner) => async () => {
-        
+
         await this.state.LandInstance.methods.LandOwnershipTransfer(
             landId, newOwner
         ).send({
-            from : this.state.account,
-            gas : 2100000
+            from: this.state.account,
+            gas: 2100000
         });
         //Reload
         console.log(newOwner);
@@ -98,11 +98,11 @@ class TransactionInfo extends Component {
             );
 
             this.setState({ LandInstance: instance, web3: web3, account: accounts[0] });
-            
+
             var verified = await this.state.LandInstance.methods.isLandInspector(currentAddress).call();
             //console.log(verified);
             this.setState({ verified: verified });
-            
+
             var count = await this.state.LandInstance.methods.getLandsCount().call();
             count = parseInt(count);
             var rowsArea = [];
@@ -120,28 +120,44 @@ class TransactionInfo extends Component {
                 rowsPrice.push(<ContractData contract="Land" method="getPrice" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
                 rowsPID.push(<ContractData contract="Land" method="getPID" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
                 rowsSurvey.push(<ContractData contract="Land" method="getSurveyNumber" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
-              }
-            for (var i = 0; i < count; i++) {
-                var request = await this.state.LandInstance.methods.getRequestDetails(i+1).call();
-                var approved = await this.state.LandInstance.methods.isApproved(i+1).call();
+            }
+
+            var data = [];
+            for (let i = 0; i < count; i++) {
+                data.push(i);
+            }
+
+
+            data.forEach(async (i) => {
+                var request = await this.state.LandInstance.methods.getRequestDetails(i + 1).call();
+                var paid = await this.state.LandInstance.methods.isPaid(i + 1).call();
                 // console.log(approved);
                 // console.log(request[3]);
-                var disabled = request[3]&&completed;
-                console.log("Disabled: ", disabled);
-                console.log("request[3]: ", request[3]);
-                console.log("completed: ", completed);
+                var disabled = request[3] && completed;
+                console.log("Disabled: ", i, disabled);
+                console.log("request status: ", i, request[3]);
+                console.log("paid: ", i, paid);
 
-                var owner = await this.state.LandInstance.methods.getLandOwner(i+1).call();
-                landTable.push(<tr><td>{i+1}</td><td>{owner}</td><td>{rowsArea[i]}</td><td>{rowsCity[i]}</td><td>{rowsState[i]}</td><td>{rowsPrice[i]}</td><td>{rowsPID[i]}</td><td>{rowsSurvey[i]}</td>
-                <td>
-                     <Button onClick={this.landTransfer(i+1, request[1])} disabled={!disabled} className="button-vote">
-                          Verify Transaction
-                    </Button>
-                </td>
-                </tr>)
-
-
-            }
+                var owner = await this.state.LandInstance.methods.getLandOwner(i + 1).call();
+                if (paid ) {
+                    landTable.push(
+                        <tr key={i}>
+                            <td>{i + 1}</td>
+                            <td>{owner}</td>
+                            <td>{rowsArea[i]}</td>
+                            <td>{rowsCity[i]}</td>
+                            <td>{rowsState[i]}</td>
+                            <td>{rowsPrice[i]}</td>
+                            <td>{rowsPID[i]}</td>
+                            <td>
+                                <Button onClick={this.landTransfer(i + 1, request[1])} disabled={!disabled}  className="button-vote">
+                                    Verify Transaction
+                                    
+                                </Button>
+                            </td>
+                        </tr>)
+                }
+            });
 
 
         } catch (error) {
@@ -204,15 +220,14 @@ class TransactionInfo extends Component {
                                         <Table className="tablesorter" responsive color="black">
                                             <thead className="text-primary">
                                                 <tr>
-                                                <th>#</th>
-                                                <th>Owner ID</th>
-                                                <th>Area</th>
-                                                <th>City</th>
-                                                <th>State</th>
-                                                <th>Price</th>
-                                                <th>Property PID</th>
-                                                <th>Survey Number</th>
-                                                <th>Verify Land Transfer</th>
+                                                    <th>#</th>
+                                                    <th>ID</th>
+                                                    <th>Diện tích</th>
+                                                    <th>Địa chỉ</th>
+                                                    <th>Mô tả</th>
+                                                    <th>Giá</th>
+                                                    <th>Mã số đất</th>
+                                                    <th>Xác minh</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

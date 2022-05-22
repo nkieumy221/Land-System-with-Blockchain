@@ -3,14 +3,14 @@ pragma experimental ABIEncoderV2;
 contract Land {
     struct Landreg {
         uint id;
-        uint area;
-        string city;
-        string state;
-        uint landPrice;
-        uint propertyPID;
-        uint physicalSurveyNumber;
-        string ipfsHash;
-        string document;
+        uint area; // diện tích
+        string city; // địa chỉ
+        string state;   // mô tả
+        uint landPrice; // giá
+        uint propertyPID;   // mã đất
+        uint physicalSurveyNumber;  
+        string ipfsHash;    // địa chỉ mã hóa đất 
+        string document;    // giấy tờ đất
     }
 
     struct Buyer{
@@ -18,8 +18,8 @@ contract Land {
         string name;
         uint age;
         string city;
-        string aadharNumber;
-        string panNumber;
+        string aadharNumber; // CMND/ CCCD
+        string panNumber;   // số tk ngân hàng
         string document;
         string email;
     }
@@ -28,9 +28,9 @@ contract Land {
         address id;
         string name;
         uint age;
-        string aadharNumber;
-        string panNumber;
-        string landsOwned;
+        string aadharNumber;    // CMND/ CCCD
+        string panNumber;   // số tk ngân hàng
+        string landsOwned;  // sđt
         string document;
     }
 

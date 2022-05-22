@@ -20,6 +20,7 @@ import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper";
 import Help from './Help';
 
+
 ReactDOM.render(
     <ThemeContextWrapper>
       <BackgroundColorWrapper>

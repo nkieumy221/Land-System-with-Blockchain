@@ -37,7 +37,7 @@ const drizzleOptions = {
 var row = [];
 var landOwner = [];
 
-class Dashboard extends Component {
+class MakePayment extends Component {
   constructor(props) {
     super(props)
 
@@ -54,8 +54,9 @@ class Dashboard extends Component {
   makePayment = (seller_address, amount, land_id) => async () => {
     // alert(amount);
 
-    amount = amount*0.0000057;
+    amount = amount * 0.00000211872;
     alert(amount);
+    
     await this.state.LandInstance.methods.payment(
       seller_address,
       land_id
@@ -66,6 +67,7 @@ class Dashboard extends Component {
     }).then(response => {
       this.props.history.push("#");
     });
+
     //Reload
     window.location.reload(false);
 
@@ -112,19 +114,32 @@ class Dashboard extends Component {
         dict[i] = address;
       }
 
-      for (var i = 0; i < count; i++) {
+      var data = [];
+      for (let i = 0; i < count ; i++) {
+        data.push(i);
+      } 
+
+      
+      data.forEach(async(i) => {
+        var requested = await this.state.LandInstance.methods.isApproved(i + 1).call();
         var paid = await this.state.LandInstance.methods.isPaid(i + 1).call();
         var price = await this.state.LandInstance.methods.getPrice(i + 1).call();
-        row.push(<tr><td>{i + 1}</td><td>{dict[i + 1]}</td><td>{price}</td>
-          <td>
-            <Button onClick={this.makePayment(dict[i + 1], price, i+1)} 
-            disabled={paid} className="btn btn-success">
-              Make Payment
-            </Button>
-          </td>
-        </tr>)
+        if(requested){
+          row.push(
+          <tr>
+            <td>{i + 1}</td>
+            <td>{dict[i + 1]}</td>
+            <td>{price}</td>
+            <td>
+              <Button onClick={this.makePayment(dict[i + 1], price, i+1)} 
+              disabled={paid} className="btn btn-success">
+                Thanh toán
+              </Button>
+            </td>
+          </tr>)
+        }
 
-      }
+      });
       console.log(row);
 
 
@@ -185,7 +200,7 @@ class Dashboard extends Component {
                 <Col lg="12" md="12">
                   <Card>
                     <CardHeader>
-                      <CardTitle tag="h4">Payment for Lands<span className="duration">₹ 1 = 0.0000057 Ether</span></CardTitle>
+                      <CardTitle tag="h5">Payment for Lands<small className="duration">1 VND = 0.0000000211872 ETH</small></CardTitle>
 
                     </CardHeader>
                     <CardBody>
@@ -193,9 +208,9 @@ class Dashboard extends Component {
                         <thead className="text-primary">
                           <tr>
                             <th>#</th>
-                            <th>Land Owner</th>
-                            <th>Price ( in ₹ )</th>
-                            <th>Make Payment</th>
+                            <th>Address đất</th>
+                            <th>Giá (vnd)</th>
+                            <th>Thanh toán</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -216,4 +231,4 @@ class Dashboard extends Component {
 }
 
 
-export default Dashboard;
+export default MakePayment;

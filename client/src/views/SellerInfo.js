@@ -68,7 +68,7 @@ class SellerInfo extends Component {
 
     }
 
-    NotverifySeller = (item) => async() => {
+    NotverifySeller = (item) => async () => {
 
         await this.state.LandInstance.methods.rejectSeller(
             item
@@ -108,10 +108,10 @@ class SellerInfo extends Component {
             sellersCount = await this.state.LandInstance.methods.getSellersCount().call();
             console.log(sellersCount);
 
-            
-            
+
+
             sellersMap = await this.state.LandInstance.methods.getSeller().call();
-            
+
             var verified = await this.state.LandInstance.methods.isLandInspector(currentAddress).call();
             //console.log(verified);
             this.setState({ verified: verified });
@@ -123,26 +123,38 @@ class SellerInfo extends Component {
                 var seller_verify = await this.state.LandInstance.methods.isVerified(sellersMap[i]).call();
                 console.log(seller_verify);
                 seller.verified = seller_verify;
-                
+
                 //seller.push(seller_verify);
                 var not_verify = await this.state.LandInstance.methods.isRejected(sellersMap[i]).call();
                 console.log(not_verify);
 
 
 
-                sellerTable.push(<tr><td>{i + 1}</td><td>{sellersMap[i]}</td><td>{seller[0]}</td><td>{seller[1]}</td><td>{seller[2]}</td><td>{seller[3]}</td><td>{seller[4]}</td><td><a href={`https://ipfs.io/ipfs/${seller[5]}`} target="_blank">Click Here</a></td>
-                    <td>{seller.verified.toString()}</td>
-                    <td>
-                        <Button onClick={this.verifySeller(sellersMap[i])} disabled={seller_verify || not_verify} className="button-vote">
-                            Verify
-                    </Button>
-                    </td>
-                    <td>
-                        <Button onClick={this.NotverifySeller(sellersMap[i])} disabled={seller_verify || not_verify} className="btn btn-danger">
-                        Reject
-                    </Button>
-                    </td></tr>)
-            console.log(seller[5]);
+                sellerTable.push(
+                    <tr>
+                        <td>{i + 1}</td>
+                        <td>{sellersMap[i]}</td>
+                        <td>{seller[0]}</td>
+                        <td>{seller[1]}</td>
+                        <td>{seller[2]}</td>
+                        <td>{seller[3]}</td>
+                        <td>{seller[4]}</td>
+                        <td>
+                            <a href={`https://ipfs.io/ipfs/${seller[5]}`} target="_blank">Click Here</a>
+                        </td>
+                        <td>{seller.verified.toString()}</td>
+                        <td>
+                            <Button onClick={this.verifySeller(sellersMap[i])} disabled={seller_verify || not_verify} className="button-vote">
+                                Verify
+                            </Button>
+                        </td>
+                        <td>
+                            <Button onClick={this.NotverifySeller(sellersMap[i])} disabled={seller_verify || not_verify} className="btn btn-danger">
+                                Reject
+                            </Button>
+                        </td>
+                    </tr>)
+                console.log(seller[5]);
 
 
             }
@@ -183,7 +195,7 @@ class SellerInfo extends Component {
                                 <Card className="card-chart">
                                     <CardBody>
                                         <h1>
-                                            You are not verified to view this page
+                                            Tài khoản cần được xác minh để xem được nội dung này
                                         </h1>
                                     </CardBody>
                                 </Card>
@@ -210,16 +222,16 @@ class SellerInfo extends Component {
                                             <thead className="text-primary">
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Account Address</th>
-                                                    <th>Name</th>
-                                                    <th>Age</th>
-                                                    <th>Aadhar Number</th>
-                                                    <th>Pan Number</th>
-                                                    <th>Owned Lands</th>
-                                                    <th>Aadhar Card Document</th>
-                                                    <th>Verification Status</th>
-                                                    <th>Verify Seller</th>
-                                                    <th>Reject Seller</th>
+                                                    <th>Địa chỉ tài khoản</th>
+                                                    <th>Tên</th>
+                                                    <th>Tuổi</th>
+                                                    <th>Số CMND</th>
+                                                    <th>Số TK ngân hàng</th>
+                                                    <th>Số điện thoại</th>
+                                                    <th>Ảnh CMND</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Xác minh</th>
+                                                    <th>Từ chối</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

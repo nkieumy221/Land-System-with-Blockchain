@@ -44,7 +44,7 @@ const drizzleOptions = {
 var buyerTable = [];
 var completed = true;
 
-function sendMail(email, name){
+function sendMail(email, name) {
     // alert(typeof(name));
 
     var tempParams = {
@@ -52,11 +52,11 @@ function sendMail(email, name){
         to_name: name,
         function: 'request and buy any land/property',
     };
-    
+
     window.emailjs.send('service_vrxa1ak', 'template_zhc8m9h', tempParams)
-    .then(function(res){
-        alert("Mail sent successfully");
-    })
+        .then(function (res) {
+            alert("Mail sent successfully");
+        })
 }
 
 class BuyerInfo extends Component {
@@ -72,7 +72,7 @@ class BuyerInfo extends Component {
         }
     }
 
-  
+
     verifyBuyer = (item) => async () => {
         //console.log("Hello");
         //console.log(item);
@@ -88,8 +88,8 @@ class BuyerInfo extends Component {
         window.location.reload(false);
 
     }
-    
-    NotverifyBuyer = (item, email, name) => async() => {
+
+    NotverifyBuyer = (item, email, name) => async () => {
         // alert('Before mail');
         sendMail(email, name);
         // alert('After mail');
@@ -133,7 +133,7 @@ class BuyerInfo extends Component {
 
             var buyersCount = await this.state.LandInstance.methods.getBuyersCount().call();
             console.log(buyersCount);
-           
+
 
             var buyersMap = [];
             buyersMap = await this.state.LandInstance.methods.getBuyer().call();
@@ -150,22 +150,34 @@ class BuyerInfo extends Component {
                 var buyer_verify = await this.state.LandInstance.methods.isVerified(buyersMap[i]).call();
                 console.log(buyer_verify);
                 buyer.verified = buyer_verify;
-                
+
                 var not_verify = await this.state.LandInstance.methods.isRejected(buyersMap[i]).call();
                 console.log(not_verify);
-                buyerTable.push(<tr><td>{i + 1}</td><td>{buyersMap[i]}</td><td>{buyer[0]}</td><td>{buyer[5]}</td><td>{buyer[4]}</td><td>{buyer[1]}</td><td>{buyer[6]}</td><td>{buyer[2]}</td><td><a href={`https://ipfs.io/ipfs/${buyer[3]}`} target="_blank">Click Here</a></td>
-                    <td>{buyer.verified.toString()}</td>
-                    <td>
-                        <Button onClick={this.verifyBuyer(buyersMap[i])} disabled={buyer_verify || not_verify} className="button-vote">
-                            Verify
-                    </Button>
-                    </td>
-                    <td>
-                        <Button onClick={this.NotverifyBuyer(buyersMap[i], buyer[4], buyer[0])} disabled={buyer_verify || not_verify} className="btn btn-danger">
-                           Reject
-                    </Button>
-                    </td>
-                </tr>)
+                buyerTable.push(
+                    <tr>
+                        <td>{i + 1}</td>
+                        <td>{buyersMap[i]}</td>
+                        <td>{buyer[0]}</td>
+                        <td>{buyer[5]}</td>
+                        <td>{buyer[4]}</td>
+                        <td>{buyer[1]}</td>
+                        <td>{buyer[6]}</td>
+                        <td>{buyer[2]}</td>
+                        <td>
+                            <a href={`https://ipfs.io/ipfs/${buyer[3]}`} target="_blank">Click Here</a>
+                        </td>
+                        <td>{buyer.verified.toString()}</td>
+                        <td>
+                            <Button onClick={this.verifyBuyer(buyersMap[i])} disabled={buyer_verify || not_verify} className="button-vote">
+                                Verify
+                            </Button>
+                        </td>
+                        <td>
+                            <Button onClick={this.NotverifyBuyer(buyersMap[i], buyer[4], buyer[0])} disabled={buyer_verify || not_verify} className="btn btn-danger">
+                                Reject
+                            </Button>
+                        </td>
+                    </tr>)
 
             }
 
@@ -203,7 +215,7 @@ class BuyerInfo extends Component {
                                 <Card className="card-chart">
                                     <CardBody>
                                         <h1>
-                                            You are not verified to view this page
+                                            Tài khoản cần được xác minh để xem được nội dung này
                                         </h1>
                                     </CardBody>
                                 </Card>
@@ -223,24 +235,24 @@ class BuyerInfo extends Component {
                             <Col xs="12">
                                 <Card>
                                     <CardHeader>
-                                        <CardTitle tag="h5">Buyers Info</CardTitle>
+                                        <CardTitle tag="h5">Quản lý thông tin Người mua</CardTitle>
                                     </CardHeader>
                                     <CardBody>
                                         <Table className="tablesorter" responsive color="black">
                                             <thead className="text-primary">
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Account Address</th>
-                                                    <th>Name</th>
-                                                    <th>Age</th>
+                                                    <th>Địa chỉ tài khoản</th>
+                                                    <th>Tên</th>
+                                                    <th>Tuổi</th>
                                                     <th>Email</th>
-                                                    <th>City</th>
-                                                    <th>Aadhar Number</th>
-                                                    <th>Pan Number</th>
-                                                    <th>Aadhar Card Document</th>
-                                                    <th>Verification Status</th>
-                                                    <th>Verify Buyer</th>
-                                                    <th>Reject Buyer</th>
+                                                    <th>Địa chỉ</th>
+                                                    <th>Số CMND</th>
+                                                    <th>Số TK ngân hàng</th>
+                                                    <th>Ảnh CMND</th>
+                                                    <th>Trạng thái </th>
+                                                    <th>Xác minh</th>
+                                                    <th>Từ chối</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

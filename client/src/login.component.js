@@ -5,7 +5,8 @@ import { Redirect } from 'react-router-dom';
 import getWeb3 from "./getWeb3"
 import LandContract from "./artifacts/Land.json"
 import { Button } from "reactstrap";
-
+import logo from "./triangle-logo.png";
+ 
 export default class Login extends Component {
     constructor() {
         super();
@@ -75,19 +76,19 @@ export default class Login extends Component {
         if (this.state.seller || this.state.buyer || this.state.landInspector) {
             return (
 
-                <div className="bodyC">
+                <div className="bodyC" >
                     <div className="img-wrapper">
-                        <img src="https://i.pinimg.com/originals/71/6e/00/716e00537e8526347390d64ec900107d.png" className="logo" />
+                        <img src={logo}  alt="" className="logo" />
                         <div className="wine-text-container">
-                            <div className="site-title wood-text">Land Registry</div>
+                            <div className="site-title wood-text">The Land</div>
                         </div>
                     </div>
-                    <div className="auth-wrapper">
-                        <div className="auth-inner">
-                            <h1>You are already registered.</h1>
-                            <Button href="/Seller/SellerDashboard" disabled={!this.state.seller} className="btn-block" style={{margin: "2px", backgroundColor: "peru"}} >Seller Dashboard</Button>
-                            <br/><Button href="/admin/dashboard" disabled={!this.state.buyer} className="btn-block" style={{margin: "2px", backgroundColor: "peru"}}>Buyer Dashboard</Button>
-                            <br/><Button href="/LI/LIdashboard" disabled={!this.state.landInspector} className="btn-block" style={{margin: "2px", backgroundColor: "peru"}}>Land Inspector Dashboard</Button>
+                    <div className="auth-wrapper"  >
+                        <div className="auth-inner" style={ {marginBottom: "190px"}}>
+                            <h3>Bạn đã đăng ký tài khoản</h3>
+                            <Button href="/Seller/SellerDashboard" disabled={!this.state.seller} className="btn-block" style={{margin: "2px", backgroundColor: "peru"}} >Tài khoản Người bán</Button>
+                            <br/><Button href="/admin/dashboard" disabled={!this.state.buyer} className="btn-block" style={{margin: "2px", backgroundColor: "peru"}}>Tài khoản Người mua</Button>
+                            <br/><Button href="/LI/LIdashboard" disabled={!this.state.landInspector} className="btn-block" style={{margin: "2px", backgroundColor: "peru"}}>Tài khoản Quản trị viên</Button>
                         </div>
                     </div>
                 </div>
@@ -100,16 +101,15 @@ export default class Login extends Component {
                  <h3 style={{color: "wheat"}}>Help?</h3>
                                     </a>
                 <div className="img-wrapper">
-                    <img src="https://i.pinimg.com/originals/71/6e/00/716e00537e8526347390d64ec900107d.png" className="logo" />
+                    <img src={logo} alt="" className="logo" />
                     <div className="wine-text-container">
-                        <div className="site-title wood-text">Land Registry</div>
+                        <div className="site-title wood-text">The Land</div>
                     </div>
                 </div>
-                <div className="auth-wrapper">
-                    <div className="auth-inner">
+                <div className="auth-wrapper" >
+                    <div className="auth-inner"  style={ {marginBottom: "160px"}}>
                         <div>
-                            <h1 style={{ letterSpacing: "3px", fontWeight: 500, color: "black" }}>Welcome !</h1>
-                            <h4 style={{ letterSpacing: "2px", color: 'black' }}>Making the Most of Digital Era!</h4>
+                            <h4 style={{ letterSpacing: "2px", color: 'black' }}>Hệ thống đất đai điện tử đầu tiên tại Việt Nam</h4>
                             <hr
                                 style={{
                                     color: "#696969",
@@ -118,16 +118,17 @@ export default class Login extends Component {
                             />
 
                             <div className="form-group" style={{ color: "black" }}>
-                                <label className="control-label" htmlFor="Company" style={{ fontSize: "18px", padding: "2px" }}>Select Role</label>
+                                <p>Bạn cần đăng nhập Metamask để truy cập hệ thống</p>
+                                <label className="control-label" htmlFor="Company" style={{ fontSize: "18px", padding: "2px" }}>Bạn muốn trở thành</label>
                                 <select id="Company" className="form-control" name="Company" onChange={this.handleInputChange} defaultValue="">
-                                    <option value="disabled">Select Role</option>
-                                    <option value="Buyer">Buyer</option>
-                                    <option value="Seller">Seller</option>
+                                    <option value="disabled">Chọn một vai trò ...</option>
+                                    <option value="Buyer">Trở thành Người mua</option>
+                                    <option value="Seller">Trở thành Người bán</option>
                                 </select>
                             </div>
 
                             <div>
-                                <button onClick={() => this.submit()} className="btn btn-primary btn-block" style={{ marginBottom: "10px", marginTop: "10px" }}>Register</button>
+                                <button onClick={() => this.submit()} className="btn btn-primary btn-block" style={{ marginBottom: "10px", marginTop: "10px" }}>Đăng ký</button>
                             </div>
                         </div>
                     </div>

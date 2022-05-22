@@ -31,7 +31,7 @@ import "../card.css";
 
 
 const drizzleOptions = {
-  contracts: [Land]
+    contracts: [Land]
 }
 
 
@@ -118,7 +118,7 @@ class LIDashboard extends Component {
                                 <Card className="card-chart">
                                     <CardBody>
                                         <h1>
-                                            You are not verified to view this page
+                                            Tài khoản cần được xác minh để xem được nội dung này
                                         </h1>
                                     </CardBody>
                                 </Card>
@@ -134,24 +134,25 @@ class LIDashboard extends Component {
             <DrizzleProvider options={drizzleOptions}>
                 <LoadingContainer>
                     <div className="content">
-                        <div className="main-section">
+                        <div className="main-section" style={{ marginLeft: "-10px" }}>
                             <Row>
                                 <Col lg="4">
-                                    <div className="dashbord dashbord-skyblue">
+                                    <div className="dashbord dashbord-skyblue" >
                                         <div className="icon-section">
                                             <i className="fa fa-users" aria-hidden="true"></i><br />
-                                            <medium>Total Buyers</medium><br />
+                                            <medium>Số lượng Người bán</medium><br />
                                             <p> {buyerarr} </p>
+                                            <small style={{ fontSize: "1rem" }}>đăng ký</small>
                                         </div>
                                         <div className="detail-section"><br />
                                         </div>
                                     </div>
                                 </Col>
                                 <Col lg="4">
-                                    <div className="dashbord dashbord-blue">
-                                        <div className="icon-section">
+                                    <div className="dashbord dashbord-blue" style={{ height: "200px" }}>
+                                        <div className="icon-section" style={{ paddingBottom: "32px" }}>
                                             <i className="fa fa-bell" aria-hidden="true"></i><br />
-                                            <medium>Total Requests</medium><br />
+                                            <medium>Yêu cầu giao dịch</medium><br />
                                             <p>{reqsarr}</p>
                                         </div>
                                         <div className="detail-section">
@@ -163,8 +164,9 @@ class LIDashboard extends Component {
                                     <div className="dashbord dashbord-orange">
                                         <div className="icon-section">
                                             <i className="fa fa-users" aria-hidden="true"></i><br />
-                                            <medium>Total Sellers</medium><br />
+                                            <medium>Tổng Người mua</medium><br />
                                             <p>{sellerarr}</p>
+                                            <small style={{ fontSize: "1rem" }}>đăng ký</small>
                                         </div>
                                         <div className="detail-section"><br />
                                         </div>
@@ -173,17 +175,17 @@ class LIDashboard extends Component {
                             </Row>
                         </div>
                         <Row>
-                        <Col lg="4">
+                            <Col lg="4">
                                 <Card>
                                     <CardHeader>
-                                        <h5 className="title">Buyers Information</h5>
+                                        <h5 className="title">Thông tin Người bán</h5>
                                     </CardHeader>
                                     <CardBody>
                                         <div className="chart-area">
 
                                             <Button href="/LI/BuyerInfo" className="btn-fill" color="primary">
-                                                Verify Buyers
-                </Button>
+                                                Xác minh
+                                            </Button>
                                         </div>
                                     </CardBody>
                                 </Card>
@@ -191,14 +193,14 @@ class LIDashboard extends Component {
                             <Col lg="4">
                                 <Card>
                                     <CardHeader>
-                                        <h5 className="title">Land Transfer Requests</h5>
+                                        <h5 className="title">Yêu cầu giao dịch đất</h5>
                                     </CardHeader>
                                     <CardBody>
                                         <div className="chart-area">
 
                                             <Button href="/LI/TransactionInfo" className="btn-fill" color="primary">
-                                                Approve Land Transactions
-                        </Button>
+                                                Phê duyệt
+                                            </Button>
                                         </div>
                                     </CardBody>
                                 </Card>
@@ -206,20 +208,20 @@ class LIDashboard extends Component {
                             <Col lg="4">
                                 <Card>
                                     <CardHeader>
-                                        <h5 className="title">Sellers Information</h5>
+                                        <h5 className="title">Thông tin Người bán</h5>
                                     </CardHeader>
                                     <CardBody>
                                         <div className="chart-area">
 
                                             <Button href="/LI/SellerInfo" className="btn-fill" color="primary">
-                                                Verify Sellers
-                </Button>
+                                                Xác minh
+                                            </Button>
                                         </div>
                                     </CardBody>
                                 </Card>
                             </Col>
-                            
-                            
+
+
                         </Row>
                     </div>
                 </LoadingContainer>

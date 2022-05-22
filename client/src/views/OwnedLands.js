@@ -3,14 +3,14 @@ import { Line, Bar } from "react-chartjs-2";
 import LandContract from "../artifacts/Land.json";
 import Land from "../artifacts/Land.json";
 import getWeb3 from "../getWeb3";
-import {  Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DrizzleProvider } from '@drizzle/react-plugin';
 import { Spinner } from 'react-bootstrap'
 import {
-    AccountData,
-    ContractData,
-    ContractForm,
-    LoadingContainer
+  AccountData,
+  ContractData,
+  ContractForm,
+  LoadingContainer
 } from "@drizzle/react-components";
 
 import viewImage from './viewImage';
@@ -59,9 +59,9 @@ class OwnedLands extends Component {
   viewImage = (landId) => {
     alert(landId);
     this.props.history.push({
-        pathname: '/viewImage',
-      })
-}
+      pathname: '/viewImage',
+    })
+  }
 
   componentDidMount = async () => {
     //For refreshing page only once
@@ -106,7 +106,7 @@ class OwnedLands extends Component {
       var rowsPID = [];
       var rowsSurvey = [];
       var rowsIpfs = []
-      
+
 
       for (var i = 1; i < count + 1; i++) {
         rowsArea.push(<ContractData contract="Land" method="getArea" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
@@ -116,15 +116,22 @@ class OwnedLands extends Component {
         rowsPID.push(<ContractData contract="Land" method="getPID" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
         rowsSurvey.push(<ContractData contract="Land" method="getSurveyNumber" methodArgs={[i, { from: "0xa42A8B478E5e010609725C2d5A8fe6c0C4A939cB" }]} />);
       }
-    
+
 
       for (var i = 0; i < count; i++) {
-        var owner = await this.state.LandInstance.methods.getLandOwner(i+1).call();
+        var owner = await this.state.LandInstance.methods.getLandOwner(i + 1).call();
         console.log(owner.toLowerCase());
         console.log(currentAddress);
-        if(owner.toLowerCase() == currentAddress){
-            row.push(<tr><td>{i + 1}</td><td>{rowsArea[i]}</td><td>{rowsCity[i]}</td><td>{rowsState[i]}</td><td>{rowsPrice[i]}</td><td>{rowsPID[i]}</td><td>{rowsSurvey[i]}</td>
-                </tr>)
+        if (owner.toLowerCase() == currentAddress) {
+          row.push(
+            <tr>
+              <td>{i + 1}</td>
+              <td>{rowsArea[i]}</td>
+              <td>{rowsCity[i]}</td>
+              <td>{rowsState[i]}</td>
+              <td>{rowsPrice[i]}</td>
+              <td>{rowsPID[i]}</td>
+            </tr>)
         }
       }
       console.log(row);
@@ -162,7 +169,7 @@ class OwnedLands extends Component {
                   <CardBody>
                     <h1>
                       You are not verified to view this page
-                                        </h1>
+                    </h1>
                   </CardBody>
                 </Card>
               </Col>
@@ -183,20 +190,19 @@ class OwnedLands extends Component {
                 <Col lg="12" md="12">
                   <Card>
                     <CardHeader>
-                      <CardTitle tag="h4">Owned Lands
+                      <CardTitle tag="h4">Đất sở hữu
                       </CardTitle>
                     </CardHeader>
                     <CardBody>
                       <Table className="tablesorter" responsive color="black">
                         <thead className="text-primary">
                           <tr>
-                          <th>#</th>
-                            <th>Area</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Price</th>
-                            <th>Property PID</th>
-                            <th>Survey Number</th>
+                            <th>#</th>
+                            <th>Diện tích</th>
+                            <th>Thành phố</th>
+                            <th>Mô tả</th>
+                            <th>Giá</th>
+                            <th>Mã số đất</th>
                           </tr>
                         </thead>
                         <tbody>

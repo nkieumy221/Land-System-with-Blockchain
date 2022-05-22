@@ -121,10 +121,8 @@ class updateBuyer extends Component {
     updateBuyer = async () => {
       if (this.state.name == '' || this.state.age == '' || this.state.city == '' || this.state.email == '' || this.state.aadharNumber == '' || this.state.panNumber == '') {
           alert("All the fields are compulsory!");
-      } else if(this.state.aadharNumber.length != 12){
-          alert("Aadhar Number should be 12 digits long!");
-      } else if(this.state.panNumber.length != 10){
-          alert("Pan Number should be a 10 digit unique number!");
+      } else if(this.state.aadharNumber.length != 9){
+          alert("CardID should be 9 digits long!");
       } else if (!Number(this.state.age)) {
           alert("Your age must be a number");
       } 
@@ -200,7 +198,7 @@ class updateBuyer extends Component {
                           <Row>
                             <Col md="12">
                               <FormGroup>
-                                <label>Name</label>
+                                <label>Tên</label>
                                 <Input
                                   type="text"
                                   value={this.state.name}
@@ -213,7 +211,7 @@ class updateBuyer extends Component {
                           <Row>
                             <Col md="12">
                               <FormGroup>
-                                <label>Age</label>
+                                <label>Tuổi</label>
                                 <Input
                                   type="text"
                                   value={this.state.age}
@@ -226,7 +224,7 @@ class updateBuyer extends Component {
                           <Row>
                             <Col md="12">
                               <FormGroup>
-                                <label>Email Address </label>
+                                <label>Email </label>
                                 <Input
                                   type="text"
                                   value={this.state.email}
@@ -238,7 +236,7 @@ class updateBuyer extends Component {
                           <Row>
                             <Col md="12">
                               <FormGroup>
-                                <label>City</label>
+                                <label>Địa chỉ</label>
                                 <Input
                                   type="text"
                                   value={this.state.city}
@@ -250,7 +248,7 @@ class updateBuyer extends Component {
                           <Row>
                             <Col md="12">
                               <FormGroup>
-                                <label>Aadhar Number</label>
+                                <label>CMND/ Căn cước công dân</label>
                                 <Input
                                   type="text"
                                   value={this.state.aadharNumber}
@@ -262,7 +260,7 @@ class updateBuyer extends Component {
                           <Row>
                             <Col md="12">
                               <FormGroup>
-                                <label>Pan Number</label>
+                                <label>Số tài khoản ngân hàng</label>
                                 <Input
                                   type="text"
                                   value={this.state.panNumber}

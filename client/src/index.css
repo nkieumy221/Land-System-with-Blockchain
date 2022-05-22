@@ -199,7 +199,7 @@
 
 
 .bodyC{
-  background-image: url("https://i.pinimg.com/originals/08/a7/ab/08a7ab130881d2fb60585dc37744e04b.jpg");
+  background-image: url("https://pdp.edu.vn/wp-content/uploads/2021/06/hinh-anh-thanh-pho-da-nang-ve-dem-dep.jpg");
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -221,14 +221,13 @@ h1,h2,h3,h4,h5,h6,label,span {
 
 body, html, .App, #root, .auth-wrapper {
   width: 100%;
-  height: 100%;
 }
 
 .logo{
-  width: 7%;
-  height: 8%;
+  width: 20%;
   float: left;
   margin-right:10px;
+  display: block;
 }
 .wine-text-container {
   display: flex;
@@ -267,15 +266,14 @@ body, html, .App, #root, .auth-wrapper {
   flex-direction: row;
   padding: 10px 0;
   position: relative;
-  margin-bottom: 40px;
-  margin-top: 5%;
+  margin-top: 20px;
 }
 .navbar-light {
   background-color: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
 }
 .wood-text {
-  background: url('https://previews.123rf.com/images/naiaekky/naiaekky1412/naiaekky141200013/34891775-golden-wood-texture.jpg');
+  background: url('https://png.pngtree.com/thumb_back/fh260/background/20190925/pngtree-blue-colour-background-image_314361.jpg');
   background-size: cover;
   position: relative;
   text-transform: uppercase;
@@ -291,7 +289,6 @@ body, html, .App, #root, .auth-wrapper {
   justify-content: center;
   flex-direction: column;
   text-align: left;
-  margin-top: -10%;
   
 }
 

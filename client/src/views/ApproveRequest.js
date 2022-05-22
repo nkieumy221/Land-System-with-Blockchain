@@ -4,7 +4,7 @@ import getWeb3 from "../getWeb3"
 import '../index.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { DrizzleProvider } from '@drizzle/react-plugin';
-import {  Spinner } from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
 // reactstrap components
 import {
     Button,
@@ -24,7 +24,7 @@ import {
     Row,
     Col,
     UncontrolledTooltip,
-  } from "reactstrap";
+} from "reactstrap";
 import {
     AccountData,
     ContractData,
@@ -51,7 +51,7 @@ class ApproveRequest extends Component {
         }
     }
     approveRequest = (reqId) => async () => {
-
+        console.log('approveRequest', reqId);
         await this.state.LandInstance.methods.approveRequest(
             reqId
         ).send({
@@ -92,22 +92,28 @@ class ApproveRequest extends Component {
             this.setState({ registered: registered });
             var requestsCount = await this.state.LandInstance.methods.getRequestsCount().call();
             console.log(requestsCount);
-            
+
             for (let i = 1; i < requestsCount + 1; i++) {
                 var request = await this.state.LandInstance.methods.getRequestDetails(i).call();
                 var approved = await this.state.LandInstance.methods.isApproved(i).call();
                 console.log(approved);
                 if (currentAddress == request[0].toLowerCase()) {
-                    requestTable.push(<tr><td>{i}</td><td>{request[1]}</td><td>{request[2]}</td><td>{request[3].toString()}</td>
-                        <td>
-                            <Button onClick={this.approveRequest(i)} disabled={approved} className="button-vote">
-                                Approve Request
-                    </Button>
-                        </td></tr>)
+                    requestTable.push(
+                        <tr>
+                            <td>{i}</td>
+                            <td>{request[1]}</td>
+                            <td>{request[2]}</td>
+                            <td>{request[3].toString()}</td>
+                            <td>
+                                <Button onClick={this.approveRequest(i)} disabled={approved} className="button-vote">
+                                    Chấp nhận
+                                </Button>
+                            </td>
+                        </tr>)
                 }
-                // console.log(request[1]);
+
             }
-            // console.log(requestTable);
+
 
         } catch (error) {
             // Catch any errors for any of the above operations.
@@ -137,8 +143,8 @@ class ApproveRequest extends Component {
                 <div className="content">
                     <div>
                         <h1>
-                            You are not authorized to view this page.
-                  </h1>
+                            Tài khoản cần được xác minh để xem được nội dung này.
+                        </h1>
                     </div>
 
                 </div>
@@ -151,7 +157,7 @@ class ApproveRequest extends Component {
                     <LoadingContainer>
                         <Card>
                             <CardHeader>
-                                <CardTitle tag="h4">Requests Info</CardTitle>
+                                <CardTitle tag="h4">Thông tin yêu cầu</CardTitle>
                             </CardHeader>
                             <CardBody>
 
@@ -161,8 +167,8 @@ class ApproveRequest extends Component {
                                             <th>#</th>
                                             <th>Buyer ID</th>
                                             <th>Land ID</th>
-                                            <th>Request Status</th>
-                                            <th>Approve Request</th>
+                                            <th>Trạng thái yêu cầu</th>
+                                            <th>Phê duyệt yêu cầu</th>
                                         </tr>
                                     </thead>
                                     <tbody>

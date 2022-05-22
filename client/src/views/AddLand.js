@@ -210,11 +210,11 @@ class AddLand extends Component {
         <div className="content">
           <div>
             <Row>
-              <Col xs="6">
+              <Col xs="12">
                 <Card className="card-chart">
                   <CardBody>
                     <h1>
-                      You are not verified to view this page
+                      Tài khoản cần được xác minh để xem được nội dung này
                                         </h1>
                   </CardBody>
                 </Card>
@@ -232,14 +232,14 @@ class AddLand extends Component {
           <Col md="8">
             <Card>
               <CardHeader>
-                <h5 className="title">Add Land</h5>
+                <h5 className="title">Thêm Nhà đất</h5>
               </CardHeader>
               <CardBody>
                 <Form>
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Area (in sqm.)</label>
+                        <label>Diện tích(m&sup2;)</label>
                         <Input
                           placeholder="Area"
                           type="text"
@@ -253,7 +253,7 @@ class AddLand extends Component {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>City</label>
+                        <label>Địa chỉ</label>
                         <Input
                           placeholder="City"
                           type="text"
@@ -266,7 +266,7 @@ class AddLand extends Component {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>State</label>
+                        <label>Mô tả</label>
                         <Input
                           placeholder="State"
                           type="text"
@@ -280,7 +280,7 @@ class AddLand extends Component {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Price</label>
+                        <label>Giá</label>
                         <Input
                           placeholder="Price"
                           type="text"
@@ -293,7 +293,7 @@ class AddLand extends Component {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Property PID Number</label>
+                        <label>Mã số đất đai</label>
                         <Input
                           placeholder="Property PID"
                           type="text"
@@ -306,7 +306,7 @@ class AddLand extends Component {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Physical Survey Number</label>
+                        <label>Số căn cước/ CMND chủ sở hữu</label>
                         <Input
                           placeholder="Survey Num"
                           type="text"
@@ -319,7 +319,7 @@ class AddLand extends Component {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Insert Land Image</label>
+                        <label>Hình ảnh mô tả Nhà đất</label>
                         <FormFile
                           id="File1"
                           onChange={this.captureFile}
@@ -330,7 +330,7 @@ class AddLand extends Component {
                   <Row>
                     <Col md="12">
                       <FormGroup>
-                        <label>Insert Adhar card document</label>
+                        <label>Giấy tờ sở hữu đất</label>
                         <FormFile
                           id="File2"
                           onChange={this.captureDoc}
@@ -342,7 +342,7 @@ class AddLand extends Component {
               </CardBody>
               <CardFooter>
                 <Button className="btn-fill" color="primary" onClick={this.addLand}>
-                  Add Land
+                  Thêm
                 </Button>
               </CardFooter>
             </Card>

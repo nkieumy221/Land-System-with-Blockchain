@@ -126,7 +126,14 @@ class SDash extends Component {
     
 
       for (var i = 0; i < count; i++) {
-        row.push(<tr><td>{i + 1}</td><td>{rowsArea[i]}</td><td>{rowsCity[i]}</td><td>{rowsState[i]}</td><td>{rowsPrice[i]}</td><td>{rowsPID[i]}</td><td>{rowsSurvey[i]}</td>
+        row.push(
+        <tr>
+          <td>{i + 1}</td>
+          <td>{rowsArea[i]}</td>
+          <td>{rowsCity[i]}</td>
+          <td>{rowsState[i]}</td>
+          <td>{rowsPrice[i]}</td>
+          <td>{rowsPID[i]}</td>
         </tr>)
 
       }
@@ -164,8 +171,8 @@ class SDash extends Component {
                 <Card className="card-chart">
                   <CardBody>
                     <h1>
-                      You are not verified to view this page
-                                        </h1>
+                      Tài khoản cần được xác minh để xem được nội dung này
+                    </h1>
                   </CardBody>
                 </Card>
               </Col>
@@ -182,13 +189,13 @@ class SDash extends Component {
         <div className="content">
         <DrizzleProvider options={drizzleOptions}>
             <LoadingContainer>
-              <div className="main-section">
+              <div className="main-section" style={{marginLeft: "-10px"}}>
                 <Row>
                   <Col lg="4">
                     <div className="dashbord dashbord-skyblue">
                       <div className="icon-section">
                         <i className="fa fa-users" aria-hidden="true"></i><br />
-                        <medium>Total Buyers</medium><br />
+                        <medium>Tổng Người mua</medium><br />
                        <p> {userarr} </p>
                       </div>
                       <div className="detail-section"><br />
@@ -196,10 +203,10 @@ class SDash extends Component {
                     </div>
                   </Col>
                   <Col lg="4">
-                    <div className="dashbord dashbord-orange">
-                      <div className="icon-section">
+                    <div className="dashbord dashbord-orange" >
+                      <div className="icon-section" >
                         <i className="fa fa-landmark" aria-hidden="true"></i><br />
-                        <medium>Registered Lands Count</medium><br />
+                        <medium>Số lượng giao dịch</medium><br />
                         <p>{countarr}</p>
                       </div>
                       <div className="detail-section"><br />
@@ -210,7 +217,7 @@ class SDash extends Component {
                     <div className="dashbord dashbord-blue">
                       <div className="icon-section">
                         <i className="fa fa-bell" aria-hidden="true"></i><br />
-                        <medium>Total Requests</medium><br />
+                        <medium>Tổng số yêu cầu</medium><br />
                         <p>{reqsarr}</p>
                       </div>
                       <div className="detail-section">
@@ -226,13 +233,13 @@ class SDash extends Component {
             <Col lg="4">
               <Card>
                 <CardHeader>
-                  <h5 className="title">Wish to Add Land !</h5>
+                  <h5 className="title">Bán Nhà đất</h5>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
 
                     <Button href="/Seller/AddLand" disabled={!this.state.verified} className="btn-fill" color="primary">
-                      Add Land
+                      Thêm
                 </Button>
                   </div>
                 </CardBody>
@@ -241,13 +248,13 @@ class SDash extends Component {
             <Col lg="4">
               <Card>
                 <CardHeader>
-                  <h5 className="title">Profile</h5>
+                  <h5 className="title">Thông tin cá nhân</h5>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
 
                     <Button href="/seller/sellerProfile" className="btn-fill" color="primary">
-                      View Profile
+                      Xem
                 </Button>
                   </div>
                 </CardBody>
@@ -256,14 +263,14 @@ class SDash extends Component {
             <Col lg="4">
               <Card>
                 <CardHeader>
-                  <h5 className="title">Requests</h5>
+                  <h5 className="title">Yêu cầu Mua bán</h5>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
 
                     <Button href="/Seller/ApproveRequest" disabled={!this.state.verified} className="btn-fill" color="primary">
-                      View all Land Requests
-                        </Button>
+                      Xem
+                    </Button>
                   </div>
                 </CardBody>
               </Card>
@@ -276,7 +283,7 @@ class SDash extends Component {
                 <Col lg="12" md="12">
                   <Card>
                     <CardHeader>
-                      <CardTitle tag="h4">Lands Info
+                      <CardTitle tag="h4">Thông tin đất đai
                       </CardTitle>
                     </CardHeader>
                     <CardBody>
@@ -284,12 +291,11 @@ class SDash extends Component {
                         <thead className="text-primary">
                           <tr>
                           <th>#</th>
-                            <th>Area</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Price</th>
-                            <th>Property PID</th>
-                            <th>Survey Number</th>
+                            <th>Diện tích</th>
+                            <th>Địa chỉ</th>
+                            <th>Mô tả</th>
+                            <th>Giá</th>
+                            <th>Mã số đất</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -306,11 +312,11 @@ class SDash extends Component {
             <Col lg="4">
               <Card>
                 <CardHeader>
-                  <CardTitle>View Images of all Lands!</CardTitle>
+                  <CardTitle>Xem hình ảnh Nhà đất</CardTitle>
                 </CardHeader>
                 <CardBody>
                     <Button href="/Seller/viewImage" className="btn-fill" color="primary">
-                      View Images
+                      XEM
                 </Button>
                 </CardBody>
               </Card>
